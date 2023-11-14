@@ -13,7 +13,8 @@ namespace BlackJack
         public CardColor Color { get; set; }
         public CardValue Value { get; set; }
         public bool Visible { get; set; }
-#endregion
+        public int NumeralValue { get; }
+        #endregion
 
 
         #region Constructors
@@ -22,11 +23,26 @@ namespace BlackJack
             Color = color;
             Value = value;
             Visible = visible;
+            NumeralValue = CalculateNumeralValue();
         }
         #endregion
 
         #region Methods
 
+        private int CalculateNumeralValue()
+        {
+            if ((int)Value == 1)
+            {
+                return 11;
+            }
+
+            if ((int)Value >= 11)
+            {
+                return 10;
+            }
+
+            return (int)Value;
+        }
         public override string ToString()
         {
             if (Visible)
